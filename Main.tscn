@@ -1,0 +1,139 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://GrabFile.gd" type="Script" id=1]
+[ext_resource path="res://Camera.gd" type="Script" id=2]
+
+[sub_resource type="SpatialMaterial" id=2]
+flags_unshaded = true
+params_use_alpha_scissor = true
+params_alpha_scissor_threshold = 0.56
+
+[sub_resource type="ArrayMesh" id=3]
+
+[node name="Spatial" type="Spatial"]
+__meta__ = {
+"_edit_horizontal_guides_": [  ]
+}
+
+[node name="Interface" type="CanvasLayer" parent="."]
+
+[node name="md3 main script" type="Control" parent="Interface"]
+margin_right = 1024.0
+margin_bottom = 600.0
+script = ExtResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="Interface/md3 main script"]
+margin_right = 355.0
+margin_bottom = 600.0
+color = Color( 0.215686, 0.137255, 0.290196, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="Interface/md3 main script"]
+margin_top = 556.0
+margin_right = 1024.0
+margin_bottom = 600.0
+color = Color( 0.215686, 0.137255, 0.290196, 1 )
+
+[node name="Button" type="Button" parent="Interface/md3 main script"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 140.0
+margin_bottom = 57.0
+text = "Choose File..."
+
+[node name="Response" type="RichTextLabel" parent="Interface/md3 main script/Button"]
+margin_left = 126.0
+margin_top = 1.0
+margin_right = 316.0
+margin_bottom = 36.0
+text = "Md3 Internal Name"
+
+[node name="TextureButton" type="Button" parent="Interface/md3 main script"]
+margin_left = 20.0
+margin_top = 63.0
+margin_right = 272.0
+margin_bottom = 87.0
+text = "Pick Texture for Preview..."
+
+[node name="ExportButton" type="Button" parent="Interface/md3 main script"]
+margin_left = 51.0
+margin_top = 496.0
+margin_right = 303.0
+margin_bottom = 551.0
+text = "Export to Godot 3 Scene..."
+
+[node name="FileDialog" type="FileDialog" parent="Interface/md3 main script"]
+margin_left = 223.0
+margin_top = 121.0
+margin_right = 640.0
+margin_bottom = 352.0
+window_title = "Open a File"
+resizable = true
+dialog_hide_on_ok = true
+mode = 0
+access = 2
+filters = PoolStringArray( "*.md3 ; Quake / SRB2 Model Files" )
+show_hidden_files = true
+
+[node name="TextureDialog" type="FileDialog" parent="Interface/md3 main script"]
+margin_left = 163.0
+margin_top = 102.0
+margin_right = 660.0
+margin_bottom = 387.0
+window_title = "Open a File"
+mode = 0
+access = 2
+filters = PoolStringArray( "*.png ; PNG Images" )
+show_hidden_files = true
+
+[node name="ExportDialog" type="FileDialog" parent="Interface/md3 main script"]
+margin_left = 277.0
+margin_top = 100.0
+margin_right = 785.0
+margin_bottom = 471.0
+window_title = "Export"
+resizable = true
+access = 2
+filters = PoolStringArray( "*.scn ; Binary Scene File", "*.tscn ; Text Scene File (might be bad on storage!)" )
+
+[node name="HSlider" type="HSlider" parent="Interface/md3 main script"]
+margin_left = 23.0
+margin_top = 571.0
+margin_right = 1005.0
+margin_bottom = 587.0
+max_value = 10.0
+ticks_on_borders = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Interface/md3 main script"]
+margin_left = 20.0
+margin_top = 94.0
+margin_right = 341.0
+margin_bottom = 459.0
+text = "This is a tool made to export .md3 models into a scene format that displays all the necessary content to animate them in godot 3 projects, I don't plan on doing much about not supporting 4, but if you plan on only using them sparringly, the converter that comes with godot 4 should be enough.
+
+Animation data is stored as metadata under these names:
+VertexFrame_x
+NormalFrame_x
+x stands for the frame number used (no padding) and you should load both at the same time when setting the frame.
+
+There's a function used to set the frame in the readme.gd, but i recognize that it might not be the most optimized, so if you could help out then please get into contact! I'm @neonsrb2 on discord, and if all else fails you can leave an issue or pull request on the repository."
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 0.002, 0, 0, 0, 0.002, 0, 0, 0, 0.002, 0, 0, 0 )
+material_override = SubResource( 2 )
+mesh = SubResource( 3 )
+
+[node name="camerapivot" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.948683, 0.316229, 0, -0.316229, 0.948683, 0, 1.52497, 0 )
+script = ExtResource( 2 )
+
+[node name="Camera" type="Camera" parent="camerapivot"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0669025, 6.51769 )
+h_offset = -2.0
+current = true
+
+[connection signal="pressed" from="Interface/md3 main script/Button" to="Interface/md3 main script" method="_on_Button_pressed"]
+[connection signal="pressed" from="Interface/md3 main script/TextureButton" to="Interface/md3 main script" method="_on_TextureButton_pressed"]
+[connection signal="pressed" from="Interface/md3 main script/ExportButton" to="Interface/md3 main script" method="_on_ExportButton_pressed"]
+[connection signal="file_selected" from="Interface/md3 main script/FileDialog" to="Interface/md3 main script" method="_on_FileDialog_file_selected"]
+[connection signal="file_selected" from="Interface/md3 main script/TextureDialog" to="Interface/md3 main script" method="_on_TextureDialog_file_selected"]
+[connection signal="file_selected" from="Interface/md3 main script/ExportDialog" to="Interface/md3 main script" method="_on_ExportDialog_file_selected"]
