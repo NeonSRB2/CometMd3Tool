@@ -1,11 +1,14 @@
 # **THIS REPOSITORY IS FOR GODOT 3**
 If you want to use this for Godot 4, try using the converter by opening up a Godot 3 project vvith the exported scene.
 
+
 Credit to [icculus.org](https://icculus.org/homepages/phaethon/q3a/formats/md3format.html#Surface) for their excellent .md3 documentation, as much trouble as I had understanding it as a certified idiot.
 As for who __I__ am, I'm NeonSRB2, and I refuse to switch to blender to the point of making this thing.
 
+
 ## Comet Md3 Tool
-!(https://raw.githubusercontent.com/NeonSRB2/CometMd3Tool/main/icon.png)
+![look mom its a sonis and knuckle reference](https://raw.githubusercontent.com/NeonSRB2/CometMd3Tool/main/icon.png)
+
 
 Not really a fancy name, but it'll do.
 This is mainly meant to help for mm3d users, as I don't think there's been a vvay to put those animations into godot before. Now all you have to do is export to .md3, export to a scene, instance it, and give it a material.
@@ -23,9 +26,13 @@ This definitley looks rather expensive, but in my testing it didn't seem to make
 The big cost these things could introduce is memory, and about the only vvay to mitigate that is reintroducing the compression used to store the normals, but that might make updating the animation much slower.
 I also suggest putting these in .scn files instead of .tscn files, since not only would it prevent mistaking it for a normal scene, it'd be a smaller file, and i vvouldn't suggest opening these in a text editor either...
 
+
 There's a couple more metadatas the tool saves than listed, as the previous code implied.
+
 `"BaseArray"`: Md3s are loaded by the tool as ArrayMeshes, this is the array used to make their surfaces, and it's required if you're going to reconstruct the surface (like the function does to update the verticies)
+
 `"FrameCount"`: The number of frames in the model, this might be good if you need a single looping animation done through script.
+
 
 As for non-Godot users, the code is meant to be more readable to put extra context behind others trying to implement any .md3 readers into their stuff, though I apologize for the vv and not so much for being very unfunny.
 As general advice, try to read something you know the value of, and then if it vvorks you know at least one more thing about the file API you're using.
