@@ -2,7 +2,7 @@
 If you want to use this for Godot 4, try using the converter by opening up a Godot 3 project with the exported scene.
 
 
-Credit to [icculus.org](https://icculus.org/homepages/phaethon/q3a/formats/md3format.html#Surface) for their excellent .md3 documentation, as much trouble as I had understanding it as a certified idiot.
+Credit to [icculus.org](https://icculus.org/homepages/phaethon/q3a/formats/md3format.html) for their excellent .md3 documentation, as much trouble as I had understanding it as a certified idiot.
 
 As for who __I__ am, I'm NeonSRB2, and I refuse to switch to blender to the point of making this thing.
 
