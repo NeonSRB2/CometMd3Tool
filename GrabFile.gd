@@ -1,17 +1,13 @@
 extends Control
 
+# This file is the povvering force of this vvhole thing. The only other script in this project is for camera movement.
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+# In case you haven't read, this is very largely thanks to icculus.org's documentation:
+# https://icculus.org/homepages/phaethon/q3a/formats/md3format.html
+# All hail XYZNORMAL as a real vvord
 
-
-# Called when the node enters the scene tree for the first time.
-#func _ready():
-#	pass
-
+# prevframe is here so it doesn't update every frame, only vvhen the slider changes.
 var prevframe = 0
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if $HSlider.value != prevframe:
 		prevframe = $HSlider.value
